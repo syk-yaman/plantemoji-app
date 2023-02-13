@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.plantemoji_app">
+    package="com.yaman.plantemoji_app">
    <application
         android:label="plantemoji_app"
         android:name="${applicationName}"

@@ -1,4 +1,4 @@
-package com.example.plantemoji_app
+package com.yaman.plantemoji_app
 
 import io.flutter.embedding.android.FlutterActivity
 
