@@ -12,7 +12,6 @@ class IntroductionPage extends StatelessWidget {
     final box = Hive.box('');
 
     return Scaffold(
-      appBar: AppBar(),
       body: IntroductionScreen(
         pages: [
           PageViewModel(
@@ -22,7 +21,11 @@ class IntroductionPage extends StatelessWidget {
                     color: Colors.green,
                     fontSize: 20)),
             image: const Image(image: AssetImage('images/plantemoji.png')),
-            body: 'Body of 1st Page',
+            bodyWidget: const Text('Let your plant have a personality!',
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey,
+                    fontSize: 20)),
           ),
           PageViewModel(
             title: 'Title of 2nd Page',
