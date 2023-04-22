@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-
+import 'assets/app_colors.dart';
 import 'home_page.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -22,20 +22,44 @@ class IntroductionPage extends StatelessWidget {
                   Text('Welcome to Plantemoji!',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          color: AppColors.greenFont,
                           fontSize: 30)),
                   Image(
                       image: AssetImage('images/plantemoji.png'), height: 300),
                   Text('Let your plant have a personality!',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
-                          color: Color.fromARGB(255, 134, 134, 134),
+                          color: AppColors.greyFont,
                           fontSize: 20))
                 ]),
           ),
           PageViewModel(
-            title: 'Title of 2nd Page',
-            body: 'Body of 2nd Page',
+            title: '',
+            bodyWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Image(
+                      image: AssetImage('images/plantemoji.png'), height: 250),
+                  const Text('Your plant will be able to:',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.blueFont,
+                          fontSize: 20)),
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: const EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                            '•  Express its health status using Emojis. \n•  Water '
+                            'itself! \n•  Join a social network of other plants.',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.greyFont,
+                                fontSize: 16),
+                            textAlign: TextAlign.start)),
+                  )
+                ]),
           ),
           PageViewModel(
             title: 'Title of 3rd Page',
