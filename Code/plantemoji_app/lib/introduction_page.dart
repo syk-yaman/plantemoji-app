@@ -25,7 +25,7 @@ class IntroductionPage extends StatelessWidget {
                           color: AppColors.greenFont,
                           fontSize: 30)),
                   Image(
-                      image: AssetImage('images/plantemoji.png'), height: 300),
+                      image: AssetImage('images/plantemoji.png'), height: 280),
                   Text('Let your plant have a personality!',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
@@ -62,12 +62,36 @@ class IntroductionPage extends StatelessWidget {
                 ]),
           ),
           PageViewModel(
-            title: 'Title of 3rd Page',
-            body: 'Body of 3rd Page',
-          ),
-          PageViewModel(
-            title: 'Title of 4th Page',
-            body: 'Body of 4th Page',
+            title: '',
+            bodyWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Image(
+                      image: AssetImage('images/plantemoji.png'), height: 250),
+                  const Text('Select an option to start:',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.blackFont,
+                          fontSize: 20)),
+                  const SizedBox(height: 20),
+                  Container(
+                    margin: const EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: Column(children: [
+                      OutlinedButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            minimumSize: const Size(180, 40)),
+                        child: const Text('I have a Plantemoji device'),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                            minimumSize: const Size(197, 40)),
+                        child: const Text('I want to explore the app'),
+                      )
+                    ]),
+                  )
+                ]),
           ),
         ],
         onDone: () {
@@ -81,8 +105,11 @@ class IntroductionPage extends StatelessWidget {
           );
         },
         skip: const Icon(Icons.skip_next),
-        next: const Icon(Icons.forward),
+        next: const Icon(Icons.arrow_forward_ios),
+        back: const Icon(Icons.arrow_back_ios_new),
         done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
+        showDoneButton: false,
+        showBackButton: true,
         dotsDecorator: DotsDecorator(
             size: const Size.square(10.0),
             activeSize: const Size(20.0, 10.0),
