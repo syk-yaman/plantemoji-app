@@ -15,17 +15,23 @@ class IntroductionPage extends StatelessWidget {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            titleWidget: const Text('Welcome to Plantemoji!',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                    fontSize: 20)),
-            image: const Image(image: AssetImage('images/plantemoji.png')),
-            bodyWidget: const Text('Let your plant have a personality!',
-                style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey,
-                    fontSize: 20)),
+            title: '',
+            bodyWidget: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  Text('Welcome to Plantemoji!',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                          fontSize: 30)),
+                  Image(
+                      image: AssetImage('images/plantemoji.png'), height: 300),
+                  Text('Let your plant have a personality!',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Color.fromARGB(255, 134, 134, 134),
+                          fontSize: 20))
+                ]),
           ),
           PageViewModel(
             title: 'Title of 2nd Page',
