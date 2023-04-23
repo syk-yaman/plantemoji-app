@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:plantemoji_app/setup_device_page.dart';
 
 import 'home_page.dart';
 
@@ -15,11 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const HomePage(),
+        routes: <String, WidgetBuilder>{
+          'setupDevice': (context) =>
+              const SetupDevicePage(title: 'Setup a Device'),
+        });
   }
 }
