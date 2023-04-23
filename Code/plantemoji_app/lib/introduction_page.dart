@@ -78,7 +78,9 @@ class IntroductionPage extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 30.0, right: 30.0),
                     child: Column(children: [
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('setupDevice');
+                        },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(180, 40)),
                         child: const Text('I have a Plantemoji device'),
