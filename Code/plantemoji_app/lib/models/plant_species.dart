@@ -1,6 +1,7 @@
 class PlantSpecies {
-  PlantSpecies({required this.name, required this.imageLink});
+  PlantSpecies({required this.id, required this.name, required this.imageLink});
 
-  late String name;
-  late String imageLink;
+  int id;
+  String name;
+  String imageLink;
 }
