@@ -26,11 +26,13 @@ class IntroductionPage extends StatelessWidget {
                           fontSize: 30)),
                   Image(
                       image: AssetImage('images/plantemoji.png'), height: 280),
-                  Text('Let your plant have a personality!',
+                  Text(
+                      textAlign: TextAlign.center,
+                      'A whole new level of uderstanding and protecting your plant',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
-                          fontSize: 20))
+                          fontSize: 18))
                 ]),
           ),
           PageViewModel(
