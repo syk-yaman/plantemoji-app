@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:plantemoji_app/FakeAPI.dart';
 import 'assets/app_colors.dart';
 import 'home_page.dart';
 import 'models/plant_species.dart';
-
-//Will come from the API later
-List<PlantSpecies> speciesList = <PlantSpecies>[
-  PlantSpecies(name: 'select', imageLink: 'images/unknownPlant.png'),
-  PlantSpecies(name: 'Rubber plant', imageLink: 'images/rubberPlant.jpg')
-];
 
 class SetupDevicePage extends StatelessWidget {
   const SetupDevicePage({Key? key, required String title}) : super(key: key);
@@ -105,7 +100,7 @@ class SetupDevicePage extends StatelessWidget {
           ),
         ],
         onDone: () {
-          box.put('introduction', false);
+          //box.put('introduction', false);
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (BuildContext context) {
@@ -141,10 +136,12 @@ class PlantSpeciesSelector extends StatefulWidget {
 }
 
 class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
-  PlantSpecies selectedSpecies = speciesList.first;
+  PlantSpecies selectedSpecies = FakeAPI.speciesList.first;
 
   @override
   Widget build(BuildContext context) {
+    final box = Hive.box('');
+
     return Column(children: [
       const SizedBox(height: 20),
       Image(image: AssetImage(selectedSpecies.imageLink), height: 145),
@@ -161,9 +158,10 @@ class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
           // This is called when the user selects an item.
           setState(() {
             selectedSpecies = value!;
+            box.put('selectedSpecies', value.id);
           });
         },
-        items: speciesList
+        items: FakeAPI.speciesList
             .map<DropdownMenuItem<PlantSpecies>>((PlantSpecies value) {
           return DropdownMenuItem<PlantSpecies>(
             value: value,
