@@ -23,7 +23,7 @@ class IntroductionPage extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppColors.greenFont,
-                          fontSize: 30)),
+                          fontSize: 28)),
                   Image(
                       image: AssetImage('images/plantemoji.png'), height: 280),
                   Text(
@@ -32,7 +32,7 @@ class IntroductionPage extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
-                          fontSize: 18))
+                          fontSize: 17))
                 ]),
           ),
           PageViewModel(
@@ -70,7 +70,7 @@ class IntroductionPage extends StatelessWidget {
                 children: <Widget>[
                   const Image(
                       image: AssetImage('images/plantemoji.png'), height: 250),
-                  const Text('Select an option to start:',
+                  const Text('How do you want to start?',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.blackFont,
