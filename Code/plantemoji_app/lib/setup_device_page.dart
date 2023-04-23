@@ -44,26 +44,27 @@ class SetupDevicePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Image(
-                      image: AssetImage('images/plantemoji.png'), height: 250),
-                  const Text('Your plant will be able to:',
+                      image: AssetImage('images/deviceSetup.png'), height: 100),
+                  const SizedBox(height: 15),
+                  const Text('Setup a Plantemoji device',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                           color: AppColors.blueFont,
-                          fontSize: 20)),
+                          fontSize: 18)),
                   const SizedBox(height: 20),
-                  Container(
-                    margin: const EdgeInsets.only(left: 30.0, right: 30.0),
-                    child: const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                            '•  Express its health status using Emojis. \n•  Water '
-                            'itself! \n•  Join a social network of other plants.',
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                color: AppColors.greyFont,
-                                fontSize: 16),
-                            textAlign: TextAlign.start)),
-                  )
+                  Image(
+                      image: AssetImage(FakeAPI.speciesList
+                          .elementAt(box.get('selectedSpecies'))
+                          .imageLink),
+                      height: 145),
+                  Text(
+                      FakeAPI.speciesList
+                          .elementAt(box.get('selectedSpecies'))
+                          .name,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: AppColors.greyFont,
+                          fontSize: 14)),
                 ]),
           ),
           PageViewModel(
