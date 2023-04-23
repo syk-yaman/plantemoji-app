@@ -3,10 +3,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'assets/app_colors.dart';
 import 'home_page.dart';
+import 'models/plant_species.dart';
 
-const List<String> list = <String>[
-  'select',
-  'Rubber plant',
+//Will come from the API later
+List<PlantSpecies> speciesList = <PlantSpecies>[
+  PlantSpecies(name: 'select', imageLink: 'images/unknownPlant.png'),
+  PlantSpecies(name: 'Rubber plant', imageLink: 'images/rubberPlant.jpg')
 ];
 
 class SetupDevicePage extends StatelessWidget {
@@ -139,16 +141,15 @@ class PlantSpeciesSelector extends StatefulWidget {
 }
 
 class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
-  String dropdownValue = list.first;
-  String selectedImage = 'images/unknownPlant.png';
+  PlantSpecies selectedSpecies = speciesList.first;
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       const SizedBox(height: 20),
-      Image(image: AssetImage(selectedImage), height: 145),
-      DropdownButton<String>(
-        value: dropdownValue,
+      Image(image: AssetImage(selectedSpecies.imageLink), height: 145),
+      DropdownButton<PlantSpecies>(
+        value: selectedSpecies,
         icon: const Icon(Icons.arrow_drop_down),
         elevation: 16,
         style: const TextStyle(color: AppColors.greyFont),
@@ -156,17 +157,17 @@ class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
           height: 2,
           color: AppColors.blueFont,
         ),
-        onChanged: (String? value) {
+        onChanged: (PlantSpecies? value) {
           // This is called when the user selects an item.
           setState(() {
-            dropdownValue = value!;
-            selectedImage = 'images/rubberPlant.jpg';
+            selectedSpecies = value!;
           });
         },
-        items: list.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
+        items: speciesList
+            .map<DropdownMenuItem<PlantSpecies>>((PlantSpecies value) {
+          return DropdownMenuItem<PlantSpecies>(
             value: value,
-            child: Text(value),
+            child: Text(value.name),
           );
         }).toList(),
       ),
