@@ -4,7 +4,10 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'assets/app_colors.dart';
 import 'home_page.dart';
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+const List<String> list = <String>[
+  'select',
+  'Rubber plant',
+];
 
 class SetupDevicePage extends StatelessWidget {
   const SetupDevicePage({Key? key, required String title}) : super(key: key);
@@ -22,20 +25,20 @@ class SetupDevicePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
                   Image(
-                      image: AssetImage('images/deviceSetup.png'), height: 120),
+                      image: AssetImage('images/deviceSetup.png'), height: 100),
                   SizedBox(height: 15),
                   Text('Setup a Plantemoji device',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppColors.blueFont,
                           fontSize: 18)),
-                  SizedBox(height: 40),
-                  Text('Please select your plant species:',
+                  SizedBox(height: 30),
+                  Text('What is your plant species?',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
-                          fontSize: 15)),
-                  DropdownButtonExample()
+                          fontSize: 14)),
+                  PlantSpeciesSelector(),
                 ]),
           ),
           PageViewModel(
@@ -128,39 +131,45 @@ class SetupDevicePage extends StatelessWidget {
   }
 }
 
-class DropdownButtonExample extends StatefulWidget {
-  const DropdownButtonExample({super.key});
+class PlantSpeciesSelector extends StatefulWidget {
+  const PlantSpeciesSelector({super.key});
 
   @override
-  State<DropdownButtonExample> createState() => _DropdownButtonExampleState();
+  State<PlantSpeciesSelector> createState() => _PlantSpeciesSelectorState();
 }
 
-class _DropdownButtonExampleState extends State<DropdownButtonExample> {
+class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
   String dropdownValue = list.first;
+  String selectedImage = 'images/unknownPlant.png';
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
-      elevation: 16,
-      style: const TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
+    return Column(children: [
+      const SizedBox(height: 20),
+      Image(image: AssetImage(selectedImage), height: 145),
+      DropdownButton<String>(
+        value: dropdownValue,
+        icon: const Icon(Icons.arrow_drop_down),
+        elevation: 16,
+        style: const TextStyle(color: AppColors.greyFont),
+        underline: Container(
+          height: 2,
+          color: AppColors.blueFont,
+        ),
+        onChanged: (String? value) {
+          // This is called when the user selects an item.
+          setState(() {
+            dropdownValue = value!;
+            selectedImage = 'images/rubberPlant.jpg';
+          });
+        },
+        items: list.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
       ),
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-        setState(() {
-          dropdownValue = value!;
-        });
-      },
-      items: list.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
+    ]);
   }
 }
