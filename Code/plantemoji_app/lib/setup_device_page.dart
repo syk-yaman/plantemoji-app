@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:plantemoji_app/FakeAPI.dart';
+import 'package:plantemoji_app/login_page.dart';
 import 'assets/app_colors.dart';
 import 'home_page.dart';
 import 'models/plant_species.dart';

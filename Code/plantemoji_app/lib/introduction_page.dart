@@ -81,7 +81,8 @@ class IntroductionPage extends StatelessWidget {
                     child: Column(children: [
                       OutlinedButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed('setupDevice');
+                          Navigator.of(context)
+                              .pushReplacementNamed('setupDevice');
                         },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(180, 40)),
