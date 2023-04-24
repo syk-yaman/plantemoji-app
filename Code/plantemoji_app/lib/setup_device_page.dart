@@ -92,13 +92,7 @@ class SetupDevicePage extends StatelessWidget {
                           color: AppColors.blueFont,
                           fontSize: 18)),
                   SizedBox(height: 80),
-                  SizedBox(height: 240, width: 300, child: QRDetector()),
-                  SizedBox(height: 2),
-                  Text('Please scan the QR code on your Plantemoji device',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.redFont,
-                          fontSize: 12)),
+                  SizedBox(height: 300, width: 350, child: QRDetector())
                 ]),
           ),
         ],
