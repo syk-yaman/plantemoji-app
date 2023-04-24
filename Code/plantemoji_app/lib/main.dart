@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:plantemoji_app/setup_device_page.dart';
+import 'package:plantemoji_app/pages/setup_device_page.dart';
 
-import 'home_page.dart';
+import 'pages/home_page.dart';
+import 'pages/login_page.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           'setupDevice': (context) =>
               const SetupDevicePage(title: 'Setup a Device'),
+          'loginPage': (context) => const LoginPage(),
         });
   }
 }

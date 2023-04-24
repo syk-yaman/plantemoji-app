@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:plantemoji_app/FakeAPI.dart';
-import 'package:plantemoji_app/login_page.dart';
-import 'assets/app_colors.dart';
-import 'home_page.dart';
-import 'models/plant_species.dart';
+import 'package:plantemoji_app/assets/app_colors.dart';
+import 'package:plantemoji_app/models/plant_species.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:flutter/foundation.dart';
 
 class SetupDevicePage extends StatelessWidget {
   const SetupDevicePage({Key? key, required String title}) : super(key: key);
@@ -98,13 +95,7 @@ class SetupDevicePage extends StatelessWidget {
         ],
         onDone: () {
           //box.put('introduction', false);
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return const LoginPage();
-              },
-            ),
-          );
+          Navigator.of(context).pushNamed('loginPage');
         },
         skip: const Icon(Icons.skip_next),
         next: const Icon(Icons.arrow_forward_ios),

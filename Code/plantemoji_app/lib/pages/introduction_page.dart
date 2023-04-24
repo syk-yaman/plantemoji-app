@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'assets/app_colors.dart';
+import '../assets/app_colors.dart';
 import 'home_page.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -81,15 +81,16 @@ class IntroductionPage extends StatelessWidget {
                     child: Column(children: [
                       OutlinedButton(
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed('setupDevice');
+                          Navigator.of(context).pushNamed('setupDevice');
                         },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(180, 40)),
                         child: const Text('I have a Plantemoji device'),
                       ),
                       OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('loginPage');
+                        },
                         style: TextButton.styleFrom(
                             minimumSize: const Size(197, 40)),
                         child: const Text('I want to explore the app'),
