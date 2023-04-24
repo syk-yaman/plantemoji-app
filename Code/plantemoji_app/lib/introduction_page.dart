@@ -31,8 +31,8 @@ class IntroductionPage extends StatelessWidget {
                       'A whole new level of uderstanding and protecting your plant',
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
-                          color: AppColors.greyFont,
-                          fontSize: 17))
+                          color: AppColors.blueFont,
+                          fontSize: 18))
                 ]),
           ),
           PageViewModel(
