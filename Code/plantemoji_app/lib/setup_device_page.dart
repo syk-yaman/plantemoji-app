@@ -101,7 +101,7 @@ class SetupDevicePage extends StatelessWidget {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return const HomePage();
+                return const LoginPage();
               },
             ),
           );
@@ -181,6 +181,7 @@ class TextFields extends StatefulWidget {
 
 class _TextFieldsState extends State<TextFields> {
   late TextEditingController _controller;
+  final box = Hive.box('');
 
   @override
   void initState() {
@@ -212,25 +213,8 @@ class _TextFieldsState extends State<TextFields> {
                       labelText: 'Pick a nickname for your plant',
                       icon: Icon(Icons.tag_faces_rounded)),
                   controller: _controller,
-                  onSubmitted: (String value) async {
-                    await showDialog<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Thanks!'),
-                          content: Text(
-                              'You typed "$value", which has length ${value.characters.length}.'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
+                  onSubmitted: (String value) {
+                    box.put('nickname', value);
                   },
                 )),
             const SizedBox(height: 10),
@@ -250,7 +234,7 @@ class DatePicker extends StatefulWidget {
 //Taken from https://www.fluttercampus.com/guide/39/how-to-show-date-picker-on-textfield-tap-and-get-formatted-date/
 class _DatePickerState extends State<DatePicker> {
   TextEditingController dateinput = TextEditingController();
-  //text editing controller for text field
+  final box = Hive.box('');
 
   @override
   void initState() {
@@ -291,6 +275,7 @@ class _DatePickerState extends State<DatePicker> {
               setState(() {
                 dateinput.text =
                     formattedDate; //set output date to TextField value.
+                box.put('owningDate', formattedDate);
               });
             } else {
               print("Date is not selected");
@@ -309,6 +294,10 @@ class QRDetector extends StatefulWidget {
 
 class _QRDetectorState extends State<QRDetector> {
   Barcode? result;
+  String helpingText = 'Scan the QR code on the Plantemoji device';
+  Color helpingTextColor = AppColors.greyFont;
+  final box = Hive.box('');
+
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -325,12 +314,17 @@ class _QRDetectorState extends State<QRDetector> {
 
   @override
   Widget build(BuildContext context) {
-    stderr.writeln('print me');
-
     return Scaffold(
       body: Column(
         children: <Widget>[
           Expanded(flex: 4, child: _buildQrView(context)),
+          const SizedBox(height: 2),
+          Text(helpingText,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: helpingTextColor,
+                  fontSize: 18)),
         ],
       ),
     );
@@ -364,6 +358,15 @@ class _QRDetectorState extends State<QRDetector> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (scanData.code!.startsWith('PTI-')) {
+          helpingText = 'Device QR code detected';
+          helpingTextColor = AppColors.greenFont;
+          box.put('deviceGUID', scanData.code);
+          //Navigator.of(context).popAndPushNamed('setupDevice');
+        } else {
+          helpingText = 'Not valid device QR code';
+          helpingTextColor = AppColors.redFont;
+        }
       });
     });
   }
