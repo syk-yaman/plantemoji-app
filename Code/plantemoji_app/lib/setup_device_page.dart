@@ -22,7 +22,7 @@ class SetupDevicePage extends StatelessWidget {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            titleWidget: const SizedBox(height: 0),
+            title: '',
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
@@ -39,12 +39,12 @@ class SetupDevicePage extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
-                          fontSize: 14)),
+                          fontSize: 16)),
                   PlantSpeciesSelector(),
                 ]),
           ),
           PageViewModel(
-            titleWidget: const SizedBox(height: 0),
+            title: '',
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -59,24 +59,26 @@ class SetupDevicePage extends StatelessWidget {
                   const SizedBox(height: 20),
                   Image(
                       image: AssetImage(FakeAPI.speciesList
-                          .elementAt(box.get('selectedSpecies'))
+                          .elementAt(
+                              box.get('selectedSpecies', defaultValue: 0))
                           .imageLink),
-                      height: 130),
+                      height: 160),
                   const SizedBox(height: 5),
                   Text(
                       FakeAPI.speciesList
-                          .elementAt(box.get('selectedSpecies'))
+                          .elementAt(
+                              box.get('selectedSpecies', defaultValue: 0))
                           .name,
                       style: const TextStyle(
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
                           fontSize: 14)),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                   const TextFields()
                 ]),
           ),
           PageViewModel(
-            titleWidget: const SizedBox(height: 0),
+            title: '',
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
@@ -88,7 +90,7 @@ class SetupDevicePage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: AppColors.blueFont,
                           fontSize: 18)),
-                  SizedBox(height: 20),
+                  SizedBox(height: 80),
                   SizedBox(height: 240, width: 300, child: QRDetector()),
                   SizedBox(height: 2),
                   Text('Please scan the QR code on your Plantemoji device',
@@ -144,7 +146,8 @@ class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
   Widget build(BuildContext context) {
     return Column(children: [
       const SizedBox(height: 20),
-      Image(image: AssetImage(selectedSpecies.imageLink), height: 145),
+      Image(image: AssetImage(selectedSpecies.imageLink), height: 250),
+      const SizedBox(height: 20),
       DropdownButton<PlantSpecies>(
         value: selectedSpecies,
         icon: const Icon(Icons.arrow_drop_down),
@@ -206,12 +209,12 @@ class _TextFieldsState extends State<TextFields> {
         child: Column(
           children: [
             SizedBox(
-                height: 35,
+                height: 40,
                 child: TextField(
                   autofocus: false,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Your plant nickname!',
+                      labelText: 'Pick a nickname for your plant',
                       icon: Icon(Icons.tag_faces_rounded)),
                   controller: _controller,
                   onSubmitted: (String value) async {
@@ -263,7 +266,7 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 35,
+        height: 40,
         child: Center(
             child: TextField(
           controller: dateinput, //editing controller of this TextField
@@ -327,6 +330,8 @@ class _QRDetectorState extends State<QRDetector> {
 
   @override
   Widget build(BuildContext context) {
+    stderr.writeln('print me');
+
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -341,7 +346,7 @@ class _QRDetectorState extends State<QRDetector> {
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
             MediaQuery.of(context).size.height < 400)
         ? 150.0
-        : 300.0;
+        : 200.0;
     // To ensure the Scanner view is properly sizes after rotation
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
@@ -372,7 +377,7 @@ class _QRDetectorState extends State<QRDetector> {
     //log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('no Permission')),
+        const SnackBar(content: Text('No Permission')),
       );
     }
   }
