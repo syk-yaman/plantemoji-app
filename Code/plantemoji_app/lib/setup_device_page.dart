@@ -5,6 +5,7 @@ import 'package:plantemoji_app/FakeAPI.dart';
 import 'assets/app_colors.dart';
 import 'home_page.dart';
 import 'models/plant_species.dart';
+import 'package:intl/intl.dart';
 
 class SetupDevicePage extends StatelessWidget {
   const SetupDevicePage({Key? key, required String title}) : super(key: key);
@@ -17,7 +18,7 @@ class SetupDevicePage extends StatelessWidget {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            title: '',
+            titleWidget: const SizedBox(height: 0),
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const <Widget>[
@@ -39,13 +40,13 @@ class SetupDevicePage extends StatelessWidget {
                 ]),
           ),
           PageViewModel(
-            title: '',
+            titleWidget: const SizedBox(height: 0),
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Image(
                       image: AssetImage('images/deviceSetup.png'), height: 100),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                   const Text('Setup a Plantemoji device',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -56,7 +57,8 @@ class SetupDevicePage extends StatelessWidget {
                       image: AssetImage(FakeAPI.speciesList
                           .elementAt(box.get('selectedSpecies'))
                           .imageLink),
-                      height: 145),
+                      height: 130),
+                  const SizedBox(height: 5),
                   Text(
                       FakeAPI.speciesList
                           .elementAt(box.get('selectedSpecies'))
@@ -65,38 +67,24 @@ class SetupDevicePage extends StatelessWidget {
                           fontWeight: FontWeight.normal,
                           color: AppColors.greyFont,
                           fontSize: 14)),
+                  const SizedBox(height: 20),
+                  const TextFields()
                 ]),
           ),
           PageViewModel(
-            title: '',
+            titleWidget: const SizedBox(height: 0),
             bodyWidget: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   const Image(
-                      image: AssetImage('images/plantemoji.png'), height: 250),
-                  const Text('Select an option to start:',
+                      image: AssetImage('images/deviceSetup.png'), height: 100),
+                  const SizedBox(height: 10),
+                  const Text('Setup a Plantemoji device',
                       style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          color: AppColors.blackFont,
-                          fontSize: 20)),
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.blueFont,
+                          fontSize: 18)),
                   const SizedBox(height: 20),
-                  Container(
-                    margin: const EdgeInsets.only(left: 30.0, right: 30.0),
-                    child: Column(children: [
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                            minimumSize: const Size(180, 40)),
-                        child: const Text('I have a Plantemoji device'),
-                      ),
-                      OutlinedButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                            minimumSize: const Size(197, 40)),
-                        child: const Text('I want to explore the app'),
-                      )
-                    ]),
-                  )
                 ]),
           ),
         ],
@@ -137,12 +125,12 @@ class PlantSpeciesSelector extends StatefulWidget {
 }
 
 class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
-  PlantSpecies selectedSpecies = FakeAPI.speciesList.first;
+  final box = Hive.box('');
+  PlantSpecies selectedSpecies = FakeAPI.speciesList
+      .elementAt(Hive.box('').get('selectedSpecies', defaultValue: 0));
 
   @override
   Widget build(BuildContext context) {
-    final box = Hive.box('');
-
     return Column(children: [
       const SizedBox(height: 20),
       Image(image: AssetImage(selectedSpecies.imageLink), height: 145),
@@ -160,6 +148,7 @@ class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
           setState(() {
             selectedSpecies = value!;
             box.put('selectedSpecies', value.id);
+            Navigator.of(context).popAndPushNamed('setupDevice');
           });
         },
         items: FakeAPI.speciesList
@@ -171,5 +160,133 @@ class _PlantSpeciesSelectorState extends State<PlantSpeciesSelector> {
         }).toList(),
       ),
     ]);
+  }
+}
+
+class TextFields extends StatefulWidget {
+  const TextFields({super.key});
+
+  @override
+  State<TextFields> createState() => _TextFieldsState();
+}
+
+class _TextFieldsState extends State<TextFields> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(
+          left: 30,
+          right: 30,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+                height: 35,
+                child: TextField(
+                  autofocus: false,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Your plant nickname!',
+                      icon: Icon(Icons.tag_faces_rounded)),
+                  controller: _controller,
+                  onSubmitted: (String value) async {
+                    await showDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Thanks!'),
+                          content: Text(
+                              'You typed "$value", which has length ${value.characters.length}.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                )),
+            const SizedBox(height: 10),
+            DatePicker()
+          ],
+        ));
+  }
+}
+
+class DatePicker extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _DatePickerState();
+  }
+}
+
+//Taken from https://www.fluttercampus.com/guide/39/how-to-show-date-picker-on-textfield-tap-and-get-formatted-date/
+class _DatePickerState extends State<DatePicker> {
+  TextEditingController dateinput = TextEditingController();
+  //text editing controller for text field
+
+  @override
+  void initState() {
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 35,
+        child: Center(
+            child: TextField(
+          controller: dateinput, //editing controller of this TextField
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              icon: Icon(Icons.calendar_today), //icon of text field
+              labelText: "Since when do you have it?" //label text of field
+              ),
+          readOnly: true, //set it true, so that user will not able to edit text
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(
+                    2000), //DateTime.now() - not to allow to choose before today.
+                lastDate: DateTime(2101));
+
+            if (pickedDate != null) {
+              print(
+                  pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+              String formattedDate =
+                  DateFormat('yyyy-MM-dd').format(pickedDate);
+              print(
+                  formattedDate); //formatted date output using intl package =>  2021-03-16
+              //you can implement different kind of Date Format here according to your requirement
+
+              setState(() {
+                dateinput.text =
+                    formattedDate; //set output date to TextField value.
+              });
+            } else {
+              print("Date is not selected");
+            }
+          },
+        )));
   }
 }
