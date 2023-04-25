@@ -2,7 +2,7 @@
     package="com.yaman.plantemoji_app">
    <application
         android:label="Plantemoji"
-        android:name="Plantemoji"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
