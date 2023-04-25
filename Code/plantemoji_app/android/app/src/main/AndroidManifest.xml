@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yaman.plantemoji_app">
    <application
-        android:label="plantemoji_app"
-        android:name="${applicationName}"
+        android:label="Plantemoji"
+        android:name="Plantemoji"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
