@@ -13,11 +13,11 @@ class DashboardPage extends StatelessWidget {
             imageName: 'images/dashBack.png',
             child: Stack(children: <Widget>[
               Positioned(
-                  top: -100.0,
-                  right: -100.0,
+                  top: -120.0,
+                  right: -120.0,
                   child: Image.asset(
                     'images/sun.png',
-                    height: 300,
+                    height: 350,
                   )),
               Positioned(right: 20.0, bottom: 180, child: WaterProgress()),
               Positioned(
@@ -32,7 +32,67 @@ class DashboardPage extends StatelessWidget {
                       child: Image.asset(
                         'images/soil.png',
                         fit: BoxFit.cover,
-                      )))
+                      ))),
+              const Positioned(
+                  bottom: 20.0,
+                  left: 10,
+                  child: Text(
+                    'Soil Moisture: 60%',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18),
+                  )),
+              const Positioned(
+                  bottom: 45.0,
+                  left: 10,
+                  child: Text(
+                    'Soil Temperature: 21 c',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18),
+                  )),
+              const Positioned(
+                  top: 80.0,
+                  right: 10,
+                  child: Text(
+                    'Sun: 20 %',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 126, 0, 0),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  )),
+              const Positioned(
+                  top: 85.0,
+                  left: 10,
+                  child: Text(
+                    'Indoor climate',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 15, 40, 85),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  )),
+              const Positioned(
+                  top: 110.0,
+                  left: 10,
+                  child: Text(
+                    'Temp: 22 c',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 53, 53, 53),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  )),
+              const Positioned(
+                  top: 130.0,
+                  left: 10,
+                  child: Text(
+                    'Humidity: 22%',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 53, 53, 53),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ))
             ])));
   }
 }

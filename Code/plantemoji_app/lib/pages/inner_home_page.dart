@@ -45,7 +45,7 @@ class _InnerHomePageState extends State<InnerHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-            backgroundColor: Color.fromARGB(255, 114, 83, 42),
+            backgroundColor: Color.fromARGB(255, 165, 115, 50),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
