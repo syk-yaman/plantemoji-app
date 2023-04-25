@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:plantemoji_app/pages/dashboard_page.dart';
+import 'package:plantemoji_app/pages/inner_home_page.dart';
 import 'package:plantemoji_app/pages/setup_device_page.dart';
 
 import 'pages/home_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
               const SetupDevicePage(title: 'Setup a Device'),
           'loginPage': (context) => const LoginPage(),
           'dashboardPage': (context) => const DashboardPage(),
+          'innerHomePage': (context) => const InnerHomePage(),
         });
   }
 }

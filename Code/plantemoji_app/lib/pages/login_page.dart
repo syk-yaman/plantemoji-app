@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void submit() {
-    Navigator.of(context).pushNamed('dashboardPage');
+    Navigator.of(context).pushNamed('innerHomePage');
     if (validate()) {
       if (onSubmitted != null) {
         onSubmitted!(email, password);
