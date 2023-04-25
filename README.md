@@ -24,8 +24,9 @@ Wireframes designed via Drow.io:
 
 Please follow the following steps:
 
-- `flutter pub get`
+- You need to run the server contained in the original project repo (InfluxDB): https://github.com/syk-yaman/plantemoji
+- Run the Docker image which contains Express.JS API.
+- Run`flutter pub get` before running the app
 - Run the app
-- You need to run the server contained in the original project repo: github.com/syk-yaman/plantemoji
 
 
