@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plantemoji_app/pages/dashboard_page.dart';
 
+import 'charts_page.dart';
+
 class InnerHomePage extends StatefulWidget {
   const InnerHomePage({super.key});
 
@@ -14,10 +16,7 @@ class _InnerHomePageState extends State<InnerHomePage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     DashboardPage(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    ChartsPage(),
     Text(
       'Index 2: School',
       style: optionStyle,
@@ -48,9 +47,9 @@ class _InnerHomePageState extends State<InnerHomePage> {
             backgroundColor: Color.fromARGB(255, 165, 115, 50),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.green,
+            icon: Icon(Icons.line_axis_outlined),
+            label: 'Charts',
+            backgroundColor: Color.fromARGB(255, 146, 44, 124),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school),

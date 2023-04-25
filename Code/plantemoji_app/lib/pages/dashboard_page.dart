@@ -132,7 +132,7 @@ class WaterProgress extends StatefulWidget {
 class _WaterProgressState extends State<WaterProgress>
     with TickerProviderStateMixin {
   late AnimationController animationController;
-  double current = 400;
+  double current = 350;
   double target = 700;
 
   @override
