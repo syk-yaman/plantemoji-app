@@ -8,23 +8,29 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ;
+
     return Scaffold(
-        body: BackgroundImageFb1(
-            imageUrl:
-                'https://firebasestorage.googleapis.com/v0/b/flutterbricks-1926c.appspot.com/o/images%2Fwidgets%2F1634411682152%2FScreen%20Shot%202021-10-16%20at%203.14.09%20PM.png?alt=media&token=ec556af9-6dff-4020-a530-2b1eec58dafe',
-            child: SizedBox(
-              height: 200,
-              width: 200,
-              child: WaterProgress(),
-            )));
+        body: BackgroundImage(
+            imageName: 'images/dashBack.png',
+            child: Column(children: <Widget>[
+              WaterProgress(),
+              Expanded(
+                  child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Image.asset(
+                        'images/soil.png',
+                        fit: BoxFit.fill,
+                      )))
+            ])));
   }
 }
 
-class BackgroundImageFb1 extends StatelessWidget {
+class BackgroundImage extends StatelessWidget {
   final Widget child;
-  final String imageUrl;
-  const BackgroundImageFb1(
-      {required this.child, required this.imageUrl, Key? key})
+  final String imageName;
+  const BackgroundImage(
+      {required this.child, required this.imageName, Key? key})
       : super(key: key);
 
   @override
