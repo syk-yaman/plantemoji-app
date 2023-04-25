@@ -8,35 +8,31 @@ class ChartsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var data1 = [
-      FlSpot(0, 3),
-      FlSpot(2.6, 2),
-      FlSpot(4.9, 5),
-      FlSpot(6.8, 3.1),
-      FlSpot(8, 4),
-      FlSpot(9.5, 3),
-      FlSpot(11, 4)
-    ];
-    var data2 = [
-      FlSpot(0, 1),
-      FlSpot(2, 4),
-      FlSpot(2, 5),
-      FlSpot(7, 3.1),
-      FlSpot(1, 4),
-      FlSpot(2, 3),
-      FlSpot(0, 4)
-    ];
     return Scaffold(
         body: BackgroundImage(
             imageName: 'images/chartsBack.png',
             child: SingleChildScrollView(
                 child: Column(
               children: [
-                SizedBox(height: 100),
+                SizedBox(height: 80),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 15),
+                    child: Text(
+                      'Charts',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 0, 117, 185),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 35),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
                 const Text(
                   'Soil Humidity',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 0, 117, 185),
                       fontWeight: FontWeight.w600,
                       fontSize: 18),
                 ),
@@ -44,7 +40,7 @@ class ChartsPage extends StatelessWidget {
                 const Text(
                   'Air Humidity',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 0, 117, 185),
                       fontWeight: FontWeight.w600,
                       fontSize: 18),
                 ),
@@ -52,7 +48,7 @@ class ChartsPage extends StatelessWidget {
                 const Text(
                   'Sunlight',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 0, 117, 185),
                       fontWeight: FontWeight.w600,
                       fontSize: 18),
                 ),
@@ -73,8 +69,8 @@ class _LineChartSample2State extends State<LineChartSample2> {
   _LineChartSample2State();
 
   List<Color> gradientColors = [
-    Color.fromARGB(255, 255, 255, 255),
-    Color.fromARGB(255, 41, 205, 255),
+    Color.fromARGB(255, 0, 94, 131),
+    Color.fromARGB(255, 0, 195, 255),
   ];
 
   bool showAvg = false;
@@ -121,7 +117,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white);
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+        color: Color.fromARGB(255, 148, 148, 148));
     Widget text;
     switch (value.toInt()) {
       case 2:
@@ -146,7 +144,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
-        fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white);
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Color.fromARGB(255, 148, 148, 148));
     String text;
     switch (value.toInt()) {
       case 1:
@@ -174,13 +174,13 @@ class _LineChartSample2State extends State<LineChartSample2> {
         verticalInterval: 1,
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: Color.fromARGB(255, 255, 67, 208),
+            color: Color.fromARGB(255, 182, 182, 182),
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: Color.fromARGB(255, 234, 71, 255),
+            color: Color.fromARGB(255, 182, 182, 182),
             strokeWidth: 1,
           );
         },

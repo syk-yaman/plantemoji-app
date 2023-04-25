@@ -101,7 +101,11 @@ class SetupDevicePage extends StatelessWidget {
         next: const Icon(Icons.arrow_forward_ios),
         back: const Icon(Icons.arrow_back_ios_new),
         done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
-        showDoneButton: false,
+        showDoneButton: true,
+        //(box.get('deviceGUID', defaultValue: null) != null &&
+        //box.get('selectedSpecies', defaultValue: null) != null &&
+        //box.get('nickname', defaultValue: null) != null &&
+        //box.get('owningDate', defaultValue: null) != null)
         showBackButton: true,
         dotsDecorator: DotsDecorator(
             size: const Size.square(10.0),
