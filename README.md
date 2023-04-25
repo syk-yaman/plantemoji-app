@@ -1,23 +1,31 @@
-# REPLACE WITH YOUR APP NAME
+# Plaentemoji app
 
-This is the Final assessment template for CASA0014 - Please use this template and edit the relevant sections to personalise.
-This section has a short introduction to what the application is
+An app that connects to a previously designed device in CE lab to visualise indoor climate
+parameters for plants, namely; air humidity and temperature, soil humidity and temperature,
+sunlight, and water storage level. The app reads a QR Code to connect to the physical device, and
+allows the user to see other users plant's sensor feed.
 
-## Use this README File 
+## Wireframing journey
 
-Use this section to show us what your Mobile App is about.   Include a Screenshot to the App, link to the various frameworks you've used. Include your presentation video here that shows off your Mobile App.   Emojis are also fun to include 📱 😄
+Ideation session in  the CE lab:
 
-Look at some other Flutter Apps online and see how they use there README File.  Good examples are:
+![System components overview](Docs/FirstIdeaSketch.jpg)
 
-- https://github.com/miickel/flutter_particle_clock
-- https://github.com/Tarikul711/flutter-food-delivery-app-ui    
-- https://github.com/mohak1283/Instagram-Clone
+Wireframes designed via Drow.io:
+
+![System components overview](Docs/Complete-wireframe.jpg)
+
+## Demo:
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ePo3tOuOHuI/0.jpg)](https://www.youtube.com/watch?v=ePo3tOuOHuI)
 
 
-## Include A Section That Tells Developers How To Install The App
+## How to install
 
-Include a section that gives intructions on how to install the app or run it in Flutter.  What versions of the plugins are you assuming?  Maybe define a licence
+Please follow the following steps:
 
-##  Contact Details
+- `flutter pub get`
+- Run the app
+- You need to run the server contained in the original project repo: github.com/syk-yaman/plantemoji
 
-Having Contact Details is also good as it shows people how to get in contact with you if they'd like to contribute to the app. 
+
