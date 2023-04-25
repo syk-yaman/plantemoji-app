@@ -8,19 +8,30 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ;
-
     return Scaffold(
         body: BackgroundImage(
             imageName: 'images/dashBack.png',
-            child: Column(children: <Widget>[
-              WaterProgress(),
+            child: Stack(children: <Widget>[
+              Positioned(
+                  top: -100.0,
+                  right: -100.0,
+                  child: Image.asset(
+                    'images/sun.png',
+                    height: 300,
+                  )),
+              Positioned(right: 20.0, bottom: 180, child: WaterProgress()),
+              Positioned(
+                  bottom: 160.0,
+                  child: Image.asset(
+                    'images/happyPlant.png',
+                    height: 400,
+                  )),
               Expanded(
                   child: Align(
                       alignment: Alignment.bottomCenter,
                       child: Image.asset(
                         'images/soil.png',
-                        fit: BoxFit.fill,
+                        fit: BoxFit.cover,
                       )))
             ])));
   }
@@ -41,7 +52,7 @@ class BackgroundImage extends StatelessWidget {
       height: double.infinity,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: AssetImage(imageName),
           fit: BoxFit.cover,
         ),
       ),
@@ -88,25 +99,33 @@ class _WaterProgressState extends State<WaterProgress>
     progress = 1.0 - progress;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 40.0),
+          padding: EdgeInsets.symmetric(vertical: 0.0),
           child: Stack(
             alignment: Alignment.center,
             children: <Widget>[
-              Center(child: Image.asset('images/drop.png')),
+              Center(
+                  child: Image.asset(
+                'images/waterBucket.png',
+                fit: BoxFit.scaleDown,
+                width: 120,
+              )),
               Center(
                 child: AnimatedBuilder(
                   animation: CurvedAnimation(
                       parent: animationController, curve: Curves.easeInOut),
                   builder: (context, child) => ClipPath(
-                    child: Image.asset('images/drop-blue.png'),
                     clipper: WaveClipper(
                         progress,
                         (progress > 0.0 && progress < 1.0)
                             ? animationController.value
                             : 0.0),
+                    child: Image.asset(
+                      'images/waterBucketFilled.png',
+                      width: 120,
+                      fit: BoxFit.scaleDown,
+                    ),
                   ),
                 ),
               ),
@@ -120,12 +139,13 @@ class _WaterProgressState extends State<WaterProgress>
                       offsetY: 3.0,
                       blur: 3.0,
                       style: TextStyle(
-                          color: Color.fromARGB(255, 0, 78, 122).withAlpha(200),
+                          color:
+                              Color.fromARGB(255, 255, 255, 255).withAlpha(200),
                           fontSize: 40.0,
                           fontWeight: FontWeight.bold),
                     ),
                     ShadowText(
-                      '$current ml',
+                      '${current.toStringAsFixed(0)} ml',
                       shadowColor: Colors.black.withOpacity(0.3),
                       offsetX: 3.0,
                       offsetY: 3.0,
@@ -141,30 +161,13 @@ class _WaterProgressState extends State<WaterProgress>
             ],
           ),
         ),
-        Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    '${(target - current < 0 ? 0 : target - current)} ml',
-                    style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-                child: Column(
-              children: <Widget>[
-                Text(
-                  '$target ml',
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600),
-                )
-              ],
-            ))
-          ],
-        ),
+        const Text(
+          'Water Bucket',
+          style: TextStyle(
+              color: Color.fromARGB(255, 55, 143, 202),
+              fontWeight: FontWeight.w600,
+              fontSize: 18),
+        )
       ],
     );
   }
